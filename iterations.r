@@ -64,6 +64,26 @@ stations_metadata_df %>%
   geom_line() + 
   theme_classic()
 
+### 6: Make pretty: 
 
+source("gql-queries/vol_qry.r")
 
+stations_metadata_df %>% 
+  filter(latestData > Sys.Date() - days(7)) %>% 
+  sample_n(1) %$% 
+  vol_qry(
+    id = id,
+    from = to_iso8601(latestData, -4),
+    to = to_iso8601(latestData, 0)
+  ) %>% 
+  GQL(., .url = configs$vegvesen_url) %>%
+  transform_volumes() %>% 
+  ggplot(aes(x=from, y=volume)) + 
+  geom_line() + 
+  xlab("From") + 
+  ylab("Volume") +
+  scale_colour_brewer(palette = "Spectral") + 
+  theme_classic()
+
+# Well it is not very pretty. 
 

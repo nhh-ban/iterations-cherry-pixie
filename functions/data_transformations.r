@@ -54,5 +54,19 @@ to_iso8601(as_datetime("2016-09-01 10:11:12"),-4)
 
 # Problem 5 #### 
 
-# function data_volumes 
-data_volumes <- function()
+# function transform_volumes 
+
+transform_volumes <- function(data){
+  data <- toJSON() %>%
+    pluck("trafficData", "volume", "edges") %>%
+    volumes <- tibble(
+        from = anytime(x$node$from),
+        to = anytime(x$node$to),
+        volume = x$node$total$volumeNumbers$volume
+      )
+    return(volumes)
+}
+
+# This is not right. Do not know how to fix
+
+                         
