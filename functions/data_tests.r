@@ -5,6 +5,9 @@
 # All tests are packed in a function test_stations_metadata that apples
 # all the aforementioned tests
 
+# Test to see if the column names are correct 
+# if the column names match the specified names below, it returns "pass", otherwise
+# it returns "fail", both of which give a message saying whether it matches or not 
 test_stations_metadata_colnames <-
   function(df) {
     
@@ -17,6 +20,9 @@ test_stations_metadata_colnames <-
     }
   }
 
+# Test to see if the number of rows seems reasonable. The expected number is between 
+# 5000 and 10000, which returns a "pass" message. Above or below these numbers return 
+# a "fail" message with feedback on whether the number is too high or too low. 
 test_stations_metadata_nrows <-
   function(df) {
     
@@ -32,6 +38,7 @@ test_stations_metadata_nrows <-
     }
   }
 
+# Test to see if the columns are specified to be the correct type 
 test_stations_metadata_coltypes <-
   function(df) {
     expected_coltypes <-
@@ -44,7 +51,8 @@ test_stations_metadata_coltypes <-
       print("FAIL: Columns do not have the correct specification")
     }
   }
-  
+
+# Test to see if a lot of data is missing or if it seems within normal expectations   
 test_stations_metadata_nmissing <-
   function(df) {
     max_miss_vals <- 200
@@ -56,6 +64,7 @@ test_stations_metadata_nmissing <-
     }
   }
 
+# Test to see if the timezone is set to UTC 
 test_stations_metadata_latestdata_timezone <-
   function(df) {
     
@@ -66,7 +75,7 @@ test_stations_metadata_latestdata_timezone <-
     }
   }
 
-
+# Gathering all the tests in one function 
 test_stations_metadata <- 
   function(df){
     test_stations_metadata_colnames(df)
